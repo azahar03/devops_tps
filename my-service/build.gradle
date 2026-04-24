@@ -57,8 +57,8 @@ tasks.named('check') {
 
 sonarqube {
     properties {
-        property 'sonar.projectKey', 'Rafael-oliveira-ferreira_devops_tp1'
-        property 'sonar.organization', 'rafael-oliveira-ferreira'
+        property 'sonar.projectKey', 'azahar03_devops_tps'
+        property 'sonar.organization', 'azahar03'
         property 'sonar.host.url', 'https://sonarcloud.io/'
         property 'sonar.coverage.jacoco.xmlReportPaths', 'build/reports/jacoco/test/jacocoTestReport.xml'
     }

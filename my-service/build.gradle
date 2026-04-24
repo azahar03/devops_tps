@@ -3,6 +3,7 @@ plugins {
 	id 'org.springframework.boot' version '3.4.4'
 	id 'io.spring.dependency-management' version '1.1.7'
 	id 'jacoco'
+	id "org.sonarqube" version "4.4.1.3373"
 }
 
 java {
@@ -32,9 +33,34 @@ tasks.named('test') {
 }
 
 tasks.named('jacocoTestReport') {
-	dependsOn tasks.named('test')
-	reports {
-		xml.required = true
-		html.required = true
-	}
+    dependsOn tasks.named('test')
+    reports {
+        xml.required = true
+        html.required = true
+    }
 }
+
+tasks.named('jacocoTestCoverageVerification') {
+    dependsOn tasks.named('jacocoTestReport')
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.80
+            }
+        }
+    }
+}
+
+tasks.named('check') {
+    dependsOn tasks.named('jacocoTestCoverageVerification')
+}
+
+sonarqube {
+    properties {
+        property 'sonar.projectKey', 'Rafael-oliveira-ferreira_devops_tp1'
+        property 'sonar.organization', 'rafael-oliveira-ferreira'
+        property 'sonar.host.url', 'https://sonarcloud.io/'
+        property 'sonar.coverage.jacoco.xmlReportPaths', 'build/reports/jacoco/test/jacocoTestReport.xml'
+    }
+}
+

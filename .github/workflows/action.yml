@@ -27,20 +27,20 @@ jobs:
 
       - name: Run Tests with Coverage
         run: |
-          cd ./MyService
+          cd ./my-service
           chmod +x gradlew
           ./gradlew test jacocoTestReport
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
-          files: ./MyService/build/reports/jacoco/test/jacocoTestReport.xml
+          files: ./my-service/build/reports/jacoco/test/jacocoTestReport.xml
           flags: unittests
           name: codecov-umbrella
           fail_ci_if_error: false
 
       - name: Build Docker images
         run: |
-          cd ./MyService
+          cd ./my-service
           docker build -t myservice:latest .
 
